@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Ethiopia 🇪🇹 - Land of Origins & Ancient History</title>
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ethGreen: '#008751',
+                        ethYellow: '#FCD116',
+                        ethRed: '#E4002B',
+                        ethGold: '#D4AF37',
+                        coffeeDark: '#2C1A1D',
+                        coffeeMedium: '#4A2E2B',
+                        earthWarm: '#FAF6F0',
+                        sandBg: '#F5EFEB',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-earthWarm text-slate-800 font-sans antialiased selection:bg-ethYellow selection:text-coffeeDark">
+
+    <!-- Announcement Bar -->
+    <div class="bg-coffeeDark text-amber-200 text-xs py-2.5 px-4 text-center border-b border-amber-900/40">
+        <div class="container mx-auto flex justify-between items-center px-2">
+            <span class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-ethGreen animate-ping"></span>
+                <span>🇪🇹 <strong>13 Months of Sunshine:</strong> Explore All 12 Regions & Chartered Cities!</span>
+            </span>
+            <div class="hidden md:flex items-center gap-4 text-xs text-amber-300/80">
+                <span><i class="fa-solid fa-cloud-sun text-ethYellow mr-1"></i> Addis Ababa 22°C</span>
+                <span><i class="fa-solid fa-clock mr-1"></i> GMT +3 (EAT)</span>
+                <button onclick="playAudioGreeting()" class="hover:text-white transition flex items-center gap-1 font-semibold text-ethGold">
+                    <i class="fa-solid fa-volume-high"></i> "Selam" (ሰላም)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-amber-900/10 transition-all duration-300" id="mainHeader">
+        <nav class="container mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden shadow-md group-hover:scale-105 transition-transform">
+                    <div class="absolute inset-0 flex flex-col">
+                        <div class="h-1/3 bg-ethGreen"></div>
+                        <div class="h-1/3 bg-ethYellow"></div>
+                        <div class="h-1/3 bg-ethRed"></div>
+                    </div>
+                    <i class="fa-solid fa-mountain-sun text-white relative z-10 text-base drop-shadow"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-coffeeDark block leading-none">EXPLORE<span class="text-ethGreen">ETHIOPIA</span></span>
+                    <span class="text-[10px] font-semibold text-amber-800 tracking-widest uppercase">Land of Origins & Civilizations</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
+                <a href="#destinations" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-monument mr-1 text-ethGold"></i> Historical Sites</a>
+                <a href="#regions" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-map-location-dot mr-1 text-ethGreen"></i> All 12 Regions Map</a>
+                <a href="#culture" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-mug-hot mr-1 text-amber-700"></i> Culture & Coffee</a>
+                <a href="#planner" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-route mr-1 text-ethRed"></i> Trip Planner</a>
+                <a href="#practical" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-passport mr-1 text-slate-500"></i> Travel Guide</a>
+                <a href="#gallery" class="hover:text-ethGreen transition-colors"><i class="fa-solid fa-images mr-1 text-emerald-600"></i> Gallery</a>
+            </div>
+
+            <!-- Action Button -->
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="openBookingModal()" class="px-5 py-2.5 rounded-full bg-ethGreen text-white text-sm font-bold shadow-md hover:bg-emerald-700 hover:shadow-lg transition flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span>Plan My Trip</span>
+                </button>
+            </div>
+
+            <!-- Mobile Drawer Button -->
+            <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-amber-100/50 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-amber-900/10 px-6 py-4 shadow-xl">
+            <div class="flex flex-col gap-3 text-base font-medium text-slate-800">
+                <a href="#destinations" class="mobile-link py-2 border-b border-slate-100 hover:text-ethGreen"><i class="fa-solid fa-monument text-ethGold w-6"></i> All Historical Sites</a>
+                <a href="#regions" class="mobile-link py-2 border-b border-slate-100 hover:text-ethGreen"><i class="fa-solid fa-map-location-dot text-ethGreen w-6"></i> Interactive Regions Map</a>
+                <a href="#culture" class="mobile-link py-2 border-b border-slate-100 hover:text-ethGreen"><i class="fa-solid fa-mug-hot text-amber-700 w-6"></i> Culture & Coffee</a>
+                <a href="#planner" class="mobile-link py-2 border-b border-slate-100 hover:text-ethGreen"><i class="fa-solid fa-route text-ethRed w-6"></i> Smart Trip Planner</a>
+                <a href="#practical" class="mobile-link py-2 border-b border-slate-100 hover:text-ethGreen"><i class="fa-solid fa-passport text-slate-500 w-6"></i> Travel Toolkit & Visa</a>
+                <a href="#gallery" class="mobile-link py-2 hover:text-ethGreen"><i class="fa-solid fa-images text-emerald-600 w-6"></i> Photo Gallery</a>
+                <button onclick="openBookingModal()" class="w-full mt-2 py-3 rounded-xl bg-ethGreen text-white font-bold text-center shadow">Inquire Vacation Package</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-coffeeDark">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1920&q=80" alt="Lalibela Rock Church" class="w-full h-full object-cover opacity-40 scale-105 transition-transform duration-10000 hover:scale-100">
+            <div class="absolute inset-0 bg-gradient-to-t from-coffeeDark via-coffeeDark/60 to-transparent"></div>
+            <div class="absolute inset-0 hero-pattern pointer-events-none"></div>
+        </div>
+
+        <div class="container mx-auto px-4 lg:px-8 relative z-10 py-16 text-center text-white">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold mb-6 backdrop-blur-sm animate-pulse">
+                <i class="fa-solid fa-crown text-ethYellow"></i> Complete Guide to All Historical Areas & Regions
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-5xl mx-auto mb-6">
+                Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-ethYellow to-emerald-400">All Regions & Historic Empires</span>
+            </h1>
+            
+            <p class="text-base md:text-xl text-slate-200 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                From Aksumite obelisks, Lalibela monoliths, Gondar royal castles, Harar walled city, Tiya megaliths, and Yeha temples to every single region from Tigray to Oromia, Amhara, Somali, and the Southern realms.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-4xl mx-auto bg-white/95 rounded-3xl p-3 md:p-4 shadow-2xl text-slate-800 backdrop-blur-md border border-amber-200/50">
+                <form id="heroSearchForm" onsubmit="handleHeroSearch(event)" class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div class="text-left px-3 py-2 bg-slate-50 rounded-2xl border border-slate-200/80">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Filter Region</label>
+                        <select id="heroRegionSelect" class="w-full bg-transparent font-bold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <option value="all">All Regions</option>
+                            <option value="tigray">Tigray</option>
+                            <option value="amhara">Amhara</option>
+                            <option value="oromia">Oromia</option>
+                            <option value="afar">Afar</option>
+                            <option value="somali">Somali</option>
+                            <option value="harari">Harari</option>
+                            <option value="benishangul">Benishangul-Gumuz</option>
+                            <option value="gambela">Gambela</option>
+                            <option value="sidama">Sidama</option>
+                            <option value="southwest">South West Ethiopia</option>
+                            <option value="south">South Ethiopia</option>
+                            <option value="central">Central Ethiopia</option>
+                            <option value="addis">Addis Ababa</option>
+                            <option value="diredawa">Dire Dawa</option>
+                        </select>
+                    </div>
+
+                    <div class="text-left px-3 py-2 bg-slate-50 rounded-2xl border border-slate-200/80">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Category</label>
+                        <select id="heroTypeSelect" class="w-full bg-transparent font-bold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <option value="all">All Attractions</option>
+                            <option value="historical">Ancient & Historical Sites</option>
+                            <option value="nature">Nature & Wildlife</option>
+                            <option value="culture">Cultural & Living Heritage</option>
+                            <option value="adventure">Extreme Wonders</option>
+                        </select>
+                    </div>
+
+                    <div class="text-left px-3 py-2 bg-slate-50 rounded-2xl border border-slate-200/80">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">Era / Style</label>
+                        <select id="heroEraSelect" class="w-full bg-transparent font-bold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <option value="all">Any Period</option>
+                            <option value="prehistoric">Prehistoric / Paleontological</option>
+                            <option value="ancient">Ancient Empire (Aksum/Yeha)</option>
+                            <option value="medieval">Medieval Rock & Castles</option>
+                            <option value="modern">Modern & Heritage Cities</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-ethGreen hover:bg-emerald-700 text-white font-extrabold rounded-2xl py-3 px-6 shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-amber-300"></i>
+                        <span>Explore All</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Historical & Attractions Grid Section -->
+    <section id="destinations" class="py-20 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <span class="text-xs font-bold text-ethGreen uppercase tracking-widest block mb-2">Unbroken Historical Legacy</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-coffeeDark">All Historical Sites & Attractions</h2>
+                </div>
+                <p class="text-slate-600 max-w-md mt-4 md:mt-0 text-sm leading-relaxed">
+                    Explore every major historical area, ancient kingdom site, UNESCO monument, and natural masterpiece without missing a single location.
+                </p>
+            </div>
+
+            <!-- Destination Filter Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 hide-scrollbar">
+                <button onclick="filterDestinations('all')" class="dest-filter-btn px-5 py-2.5 rounded-full text-xs font-bold transition bg-coffeeDark text-white shadow" data-category="all">
+                    All Attractions (<span id="countAll">0</span>)
+                </button>
+                <button onclick="filterDestinations('historical')" class="dest-filter-btn px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-amber-100 transition" data-category="historical">
+                    <i class="fa-solid fa-monument text-ethGold mr-1"></i> Historical & Ancient Sites (<span id="countHist">0</span>)
+                </button>
+                <button onclick="filterDestinations('nature')" class="dest-filter-btn px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-amber-100 transition" data-category="nature">
+                    <i class="fa-solid fa-mountain text-ethGreen mr-1"></i> Nature & National Parks (<span id="countNat">0</span>)
+                </button>
+                <button onclick="filterDestinations('culture')" class="dest-filter-btn px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-amber-100 transition" data-category="culture">
+                    <i class="fa-solid fa-users text-ethRed mr-1"></i> Culture & Sacred Heritage (<span id="countCult">0</span>)
+                </button>
+                <button onclick="filterDestinations('adventure')" class="dest-filter-btn px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-amber-100 transition" data-category="adventure">
+                    <i class="fa-solid fa-fire text-amber-500 mr-1"></i> Extreme Wonders (<span id="countAdv">0</span>)
+                </button>
+            </div>
+
+            <!-- Destinations Cards Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="destinationsGrid">
+                <!-- Cards generated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Interactive Region Map Section -->
+    <section id="regions" class="py-20 bg-sandBg border-y border-amber-900/10">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold text-ethGreen uppercase tracking-widest block mb-2">Complete Political Geography</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-coffeeDark">Explore All Ethiopian Regions</h2>
+                <p class="text-slate-600 mt-3 text-sm">Every region and chartered city in Ethiopia. Click any area on the interactive vector map or buttons below to view detailed historical facts, capital city, and key landmarks.</p>
+            </div>
+
+            <!-- Quick Region Selector Bar -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 hide-scrollbar justify-start lg:justify-center flex-nowrap md:flex-wrap" id="regionBtnBar">
+                <!-- Region Selector Buttons standard generated by JS -->
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- SVG Map Container -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-3xl shadow-lg border border-amber-900/10 relative">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+                        <span class="text-xs font-bold text-slate-500 uppercase"><i class="fa-solid fa-map-pin text-ethRed mr-1"></i> Click Region to Inspect Detail</span>
+                        <span class="text-xs text-amber-800 bg-amber-50 px-3 py-1 rounded-full font-bold border border-amber-200/60" id="selectedRegionTag">Region: Amhara</span>
+                    </div>
+                    
+                    <div class="relative w-full aspect-[4/3] flex items-center justify-center bg-emerald-50/20 rounded-2xl overflow-hidden border border-emerald-100 p-2">
+                        <svg viewBox="0 0 900 700" class="w-full h-full drop-shadow-md select-none" id="ethiopiaMapSvg">
+                            <!-- Tigray -->
+                            <path d="M 370 70 L 480 80 L 510 140 L 440 180 L 360 150 L 350 100 Z" fill="#2C1A1D" stroke="#ffffff" stroke-width="2" class="map-region" data-region="tigray" onclick="selectRegion('tigray')"/>
+                            <text x="410" y="125" fill="#ffffff" font-size="13" font-weight="extrabold" pointer-events="none">TIGRAY</text>
+
+                            <!-- Afar -->
+                            <path d="M 510 140 L 640 160 L 690 270 L 580 300 L 490 240 L 440 180 Z" fill="#008751" stroke="#ffffff" stroke-width="2" class="map-region" data-region="afar" onclick="selectRegion('afar')"/>
+                            <text x="540" y="215" fill="#ffffff" font-size="14" font-weight="extrabold" pointer-events="none">AFAR</text>
+
+                            <!-- Amhara -->
+                            <path d="M 280 150 L 360 150 L 440 180 L 490 240 L 430 320 L 300 300 L 250 220 Z" fill="#D4AF37" stroke="#ffffff" stroke-width="2" class="map-region" data-region="amhara" onclick="selectRegion('amhara')"/>
+                            <text x="330" y="235" fill="#ffffff" font-size="15" font-weight="extrabold" pointer-events="none">AMHARA</text>
+
+                            <!-- Benishangul-Gumuz -->
+                            <path d="M 170 200 L 250 220 L 300 300 L 210 330 L 160 270 Z" fill="#4A2E2B" stroke="#ffffff" stroke-width="2" class="map-region" data-region="benishangul" onclick="selectRegion('benishangul')"/>
+                            <text x="180" y="260" fill="#ffffff" font-size="10" font-weight="bold" pointer-events="none">BENISHANGUL</text>
+
+                            <!-- Oromia -->
+                            <path d="M 210 330 L 300 300 L 430 320 L 580 300 L 630 380 L 570 520 L 430 570 L 340 470 L 290 380 Z" fill="#E4002B" stroke="#ffffff" stroke-width="2" class="map-region" data-region="oromia" onclick="selectRegion('oromia')"/>
+                            <text x="420" y="420" fill="#ffffff" font-size="18" font-weight="extrabold" pointer-events="none">OROMIA</text>
+
+                            <!-- Somali -->
+                            <path d="M 580 300 L 690 270 L 830 360 L 810 530 L 630 380 Z" fill="#008751" stroke="#ffffff" stroke-width="2" class="map-region" data-region="somali" onclick="selectRegion('somali')"/>
+                            <text x="680" y="380" fill="#ffffff" font-size="16" font-weight="extrabold" pointer-events="none">SOMALI</text>
+
+                            <!-- Gambela -->
+                            <path d="M 120 330 L 210 330 L 230 400 L 140 410 Z" fill="#2C1A1D" stroke="#ffffff" stroke-width="2" class="map-region" data-region="gambela" onclick="selectRegion('gambela')"/>
+                            <text x="135" y="370" fill="#ffffff" font-size="10" font-weight="bold" pointer-events="none">GAMBELA</text>
+
+                            <!-- South West Ethiopia -->
+                            <path d="M 230 400 L 290 380 L 280 470 L 190 470 L 140 410 Z" fill="#D4AF37" stroke="#ffffff" stroke-width="2" class="map-region" data-region="southwest" onclick="selectRegion('southwest')"/>
+                            <text x="200" y="435" fill="#ffffff" font-size="10" font-weight="bold" pointer-events="none">SOUTH WEST</text>
+
+                            <!-- Central Ethiopia -->
+                            <path d="M 290 380 L 340 370 L 330 430 L 280 430 Z" fill="#4A2E2B" stroke="#ffffff" stroke-width="2" class="map-region" data-region="central" onclick="selectRegion('central')"/>
+                            <text x="290" y="405" fill="#ffffff" font-size="9" font-weight="bold" pointer-events="none">CENTRAL</text>
+
+                            <!-- Sidama -->
+                            <path d="M 330 430 L 370 420 L 360 460 L 320 460 Z" fill="#008751" stroke="#ffffff" stroke-width="1.5" class="map-region" data-region="sidama" onclick="selectRegion('sidama')"/>
+                            <text x="330" y="448" fill="#ffffff" font-size="8" font-weight="bold" pointer-events="none">SIDAMA</text>
+
+                            <!-- South Ethiopia Regional State -->
+                            <path d="M 280 470 L 360 460 L 430 570 L 300 600 L 210 520 Z" fill="#2C1A1D" stroke="#ffffff" stroke-width="2" class="map-region" data-region="south" onclick="selectRegion('south')"/>
+                            <text x="270" y="530" fill="#ffffff" font-size="12" font-weight="extrabold" pointer-events="none">SOUTH ETHIOPIA</text>
+
+                            <!-- Harari Region -->
+                            <circle cx="610" cy="330" r="14" fill="#FCD116" stroke="#ffffff" stroke-width="2" class="map-region" data-region="harari" onclick="selectRegion('harari')"/>
+                            <text x="630" y="334" fill="#2C1A1D" font-size="11" font-weight="extrabold" pointer-events="none">HARARI</text>
+
+                            <!-- Dire Dawa City -->
+                            <circle cx="595" cy="305" r="11" fill="#E4002B" stroke="#ffffff" stroke-width="2" class="map-region" data-region="diredawa" onclick="selectRegion('diredawa')"/>
+                            <text x="612" y="308" fill="#2C1A1D" font-size="10" font-weight="extrabold" pointer-events="none">DIRE DAWA</text>
+
+                            <!-- Addis Ababa Capital Pin -->
+                            <circle cx="390" cy="335" r="13" fill="#E4002B" stroke="#ffffff" stroke-width="2" class="pulse-pin cursor-pointer" onclick="selectRegion('addis')"/>
+                            <circle cx="390" cy="335" r="4" fill="#ffffff" pointer-events="none"/>
+                            <text x="410" y="340" fill="#2C1A1D" font-size="12" font-weight="extrabold" pointer-events="none">ADDIS ABABA</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Region Detail Card Output -->
+                <div class="lg:col-span-5 bg-white p-8 rounded-3xl shadow-lg border border-amber-900/10 flex flex-col justify-between min-h-[480px]" id="regionDetailCard">
+                    <!-- Dynamic details populated via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Showcase Section -->
+    <section id="culture" class="py-20 bg-coffeeDark text-white relative">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold text-ethYellow uppercase tracking-widest block mb-2">Living Heritage & Traditions</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white">The Heart of Ethiopian Culture</h2>
+                <p class="text-slate-300 mt-3 text-sm">Ethiopia is the birthplace of Coffee Arabica (*Buna*), teff grain superfood, and an ancient Ge'ez written script.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex justify-center mb-10 border-b border-amber-900/40">
+                <div class="flex gap-4 sm:gap-8 text-sm font-bold">
+                    <button onclick="switchCultureTab('coffee')" id="tabBtnCoffee" class="pb-4 border-b-2 border-ethYellow text-ethYellow transition">
+                        <i class="fa-solid fa-mug-hot mr-2"></i> Coffee Ceremony (Buna)
+                    </button>
+                    <button onclick="switchCultureTab('cuisine')" id="tabBtnCuisine" class="pb-4 border-b-2 border-transparent text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-utensils mr-2"></i>  Injera
+                    </button>
+                    <button onclick="switchCultureTab('language')" id="tabBtnLanguage" class="pb-4 border-b-2 border-transparent text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-language mr-2"></i> Amharic & English phrases
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 1: Coffee -->
+            <div id="cultureContentCoffee" class="culture-tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3">Origin of Coffee</span>
+                        <h3 class="text-2xl md:text-4xl font-extrabold text-amber-100 mb-4">The Traditional Coffee Ritual</h3>
+                        <p class="text-slate-300 text-xs md:text-sm leading-relaxed mb-6">
+                            Brewing coffee (*Buna*) in a clay pot (*Jebena*) over hot coals while frankincense burns is a foundational social ceremony of friendship, community, and hospitality across all regions of Ethiopia.
+                        </p>
+                        
+                        <div class="space-y-3">
+                            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-ethGreen/30 text-ethGreen font-extrabold flex items-center justify-center shrink-0">1</span>
+                                <div>
+                                    <h4 class="font-bold text-amber-200 text-sm">Abol (አቦል) - First Cup</h4>
+                                    <p class="text-xs text-slate-300">The first and strongest brew, served with roasted popcorn or toasted barley (Kolo).</p>
+                                </div>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-ethYellow/30 text-ethYellow font-extrabold flex items-center justify-center shrink-0">2</span>
+                                <div>
+                                    <h4 class="font-bold text-amber-200 text-sm">Tona (ቶና) - Second Cup</h4>
+                                    <p class="text-xs text-slate-300">Fresh hot water is added to original grounds for a smoother, milder secondary flavor.</p>
+                                </div>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-ethRed/30 text-ethRed font-extrabold flex items-center justify-center shrink-0">3</span>
+                                <div>
+                                    <h4 class="font-bold text-amber-200 text-sm">Baraka (በረካ) - The Blessing</h4>
+                                    <p class="text-xs text-slate-300">The final cup imparting goodwill, health, and peace upon all family and visitors.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border border-amber-500/20">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.GSlMLBvWX-47VhD_Csy1xAHaEJ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Coffee Ceremony" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Cuisine -->
+            <div id="cultureContentCuisine" class="culture-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/5 rounded-3xl p-6 border border-white/10">
+                        <img src="https://www.veryhungrynomads.com/wp-content/uploads/2023/08/Foods-From-Ethiopia-Yetsom-Beyaynetu.png" alt="Injera" class="w-full h-40 object-cover rounded-2xl mb-4">
+                        <h4 class="text-lg font-bold text-white">Injera & Beyaynetu</h4>
+                        <p class="text-slate-300 text-xs mt-2">Spongy sourdough flatbread made from Teff superfood grain, served with colorful vegetarian stews (*Wat*).</p>
+                    </div>
+                    <div class="bg-white/5 rounded-3xl p-6 border border-white/10">
+                        <img src="https://eggs.ca/wp-content/uploads/2024/06/EFC-doro-wat-hero-1280x720-1.jpg" alt="Doro Wat" class="w-full h-40 object-cover rounded-2xl mb-4">
+                        <h4 class="text-lg font-bold text-white">Doro Wat </h4>
+                        <p class="text-slate-300 text-xs mt-2">Rich chicken stew seasoned with Berbere spice mix, clarified spiced butter (*Niter Kibbeh*), and hard-boiled eggs.</p>
+                    </div>
+                    <div class="bg-white/5 rounded-3xl p-6 border border-white/10">
+                        <img src="https://aemeromedia.com/storage/2024/04/tej.jpg" alt="Tej Mead" class="w-full h-40 object-cover rounded-2xl mb-4">
+                        <h4 class="text-lg font-bold text-white">Tej </h4>
+                        <p class="text-slate-300 text-xs mt-2">Golden mead fermented from organic natural honey and Gesho leaves, served in flask-shaped *Berele* glasses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Amharic Language -->
+            <div id="cultureContentLanguage" class="culture-tab-content hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="phraseCardsContainer">
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">ሰላም (Selam)</span>
+                        <span class="text-xs text-slate-300 font-medium">Hello / Peace</span>
+                        <span class="text-lg font-bold text-ethYellow block">Akkam </span>
+                    </div>
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">አመሰግናለሁ (Ameseginalehu)</span>
+                        <span class="text-xs text-slate-300 font-medium">Thank you</span>
+                        <span class="text-lg font-bold text-ethYellow block">Gaaltoomii</span>
+                    </div>
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">እሺ (Eshi)</span>
+                        <span class="text-xs text-slate-300 font-medium">Okay / Agreed</span>
+                        <span class="text-lg font-bold text-ethYellow block">Tolee </span>
+                    </div>
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">ቡና (Buna)</span>
+                        <span class="text-xs text-slate-300 font-medium">Coffee</span>
+                        <span class="text-lg font-bold text-ethYellow block">Buunaa naa fidii</span>
+                    </div>
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">እንጀራ (Injera)</span>
+                        <span class="text-lg font-bold text-ethYellow block">Buudeenaa</span>
+                        
+                    </div>
+                    <div class="p-4 bg-white/10 rounded-2xl border border-white/10 text-center">
+                        <span class="text-lg font-bold text-ethYellow block">ደህና ሁን (Dehna Hun)</span>
+                        <span class="text-xs text-slate-300 font-medium">Goodbye</span>
+                        <span class="text-lg font-bold text-ethYellow block">Nagahaa Ta'a</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Itinerary Generator Section -->
+    <section id="planner" class="py-20 bg-white">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-ethGreen uppercase tracking-widest block mb-2">Smart Route Builder</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-coffeeDark">Build Your Custom Itinerary</h2>
+                <p class="text-slate-600 mt-2 text-sm">Select your trip length and main interest to receive a personalized route across regions and historical areas.</p>
+            </div>
+
+            <form id="itineraryQuizForm" onsubmit="generateItinerary(event)" class="bg-earthWarm p-8 rounded-3xl border border-amber-900/10 shadow-lg space-y-6">
+                <div>
+                    <label class="block text-sm font-extrabold text-coffeeDark mb-2">Trip Duration</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="duration" value="3" class="peer hidden" checked>
+                            <div class="p-3 bg-white text-center rounded-xl border-2 peer-checked:border-ethGreen peer-checked:bg-emerald-50 text-xs font-bold">3 - 5 Days</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="duration" value="7" class="peer hidden">
+                            <div class="p-3 bg-white text-center rounded-xl border-2 peer-checked:border-ethGreen peer-checked:bg-emerald-50 text-xs font-bold">7 - 10 Days</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="duration" value="14" class="peer hidden">
+                            <div class="p-3 bg-white text-center rounded-xl border-2 peer-checked:border-ethGreen peer-checked:bg-emerald-50 text-xs font-bold">12 - 16 Days</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-extrabold text-coffeeDark mb-2">Primary Focus</label>
+                    <select id="itineraryFocus" class="w-full p-3 bg-white border border-slate-200 rounded-xl font-bold text-xs">
+                        <option value="historical">Historic Route (Lalibela, Aksum, Gondar, Harar, Yeha)</option>
+                        <option value="nature">Nature & High Peaks (Simien, Bale, Lake Tana)</option>
+                        <option value="cultural">Living Culture & Tribes (Omo Valley, Harar, Hawassa)</option>
+                        <option value="grand">Grand Ethiopian Circuit (All Historical & Regional Highlights)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-coffeeDark text-amber-300 rounded-xl font-bold shadow-md hover:bg-slate-900 transition">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2 text-ethYellow"></i> Generate Recommended Historical Route
+                </button>
+            </form>
+
+            <div id="itineraryResult" class="hidden mt-8"></div>
+        </div>
+    </section>
+
+    <!-- Practical Travel Tools -->
+    <section id="practical" class="py-20 bg-sandBg border-t border-amber-900/10">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Visa Card -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-amber-900/10">
+                    <i class="fa-solid fa-passport text-3xl text-ethGreen mb-4"></i>
+                    <h3 class="text-xl font-bold text-coffeeDark mb-2">e-Visa Requirements</h3>
+                    <p class="text-xs text-slate-600 mb-4">Tourists from all countries can apply online prior to arrival via official Ethiopian government portal (evisa.gov.et).</p>
+                    <a href="https://www.evisa.gov.et" target="_blank" class="text-xs font-bold text-ethGreen hover:underline">Visit Official Portal →</a>
+                </div>
+
+                <!-- Currency Converter -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-amber-900/10">
+                    <i class="fa-solid fa-money-bill-transfer text-3xl text-ethGold mb-4"></i>
+                    <h3 class="text-xl font-bold text-coffeeDark mb-2">Currency Converter (ETB)</h3>
+                    <div class="space-y-3">
+                        <input type="number" id="calcAmount" value="100" oninput="convertCurrency()" class="w-full p-2.5 border rounded-xl font-bold text-xs">
+                        <select id="calcFrom" onchange="convertCurrency()" class="w-full p-2.5 border rounded-xl font-bold text-xs">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                        <div class="p-3 bg-earthWarm rounded-xl text-center font-extrabold text-ethGreen text-lg" id="calcResult">
+                            16,500.00 ETB
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasons Card -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-amber-900/10">
+                    <i class="fa-solid fa-sun text-3xl text-ethRed mb-4"></i>
+                    <h3 class="text-xl font-bold text-coffeeDark mb-2">Best Travel Seasons</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        <strong>Oct – Feb:</strong> Sunny weather, ideal for Historic Circuit, Timkat festival (Jan), and Danakil.<br>
+                        <strong>Mar – May:</strong> Great for trekking Simien and Bale mountains.<br>
+                        <strong>Sep:</strong> Meskel festival with lush green landscapes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-ethGreen uppercase tracking-widest block mb-2">Visual Heritage</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-coffeeDark">Snapshots of Ethiopia</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://ethiopia-e-visa.com/images/Lalibela-new--pic.webp" alt="Lalibela" class="rounded-2xl h-48 w-full object-cover shadow hover:scale-105 transition cursor-pointer" onclick="openLightbox(this.src, 'Lalibela Rock-Hewn Church of Biete Ghiorgis')">
+                <img src="https://d3m4c209qf8hgy.cloudfront.net/uploads/h1-fasil-ghebbi-is-a-historic-fortress-in-the-city-of-gondar-658-1682673171.jpg" alt="Gondar Castle" class="rounded-2xl h-48 w-full object-cover shadow hover:scale-105 transition cursor-pointer" onclick="openLightbox(this.src, 'Fasil Ghebbi Castles in Gondar')">
+                <img src="https://yodoozy.com/wp-content/uploads/2021/03/Danakil-scaled.jpg" alt="Danakil" class="rounded-2xl h-48 w-full object-cover shadow hover:scale-105 transition cursor-pointer" onclick="openLightbox(this.src, 'Dallol Sulfur Hydrothermal Springs')">
+                <img src="https://nationalparksassociation.org/wp-content/uploads/2024/02/Simien-Mountains-National-Park.jpg" alt="Simien Mountains" class="rounded-2xl h-48 w-full object-cover shadow hover:scale-105 transition cursor-pointer" onclick="openLightbox(this.src, 'Simien Mountains World Heritage Plateau')">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-12 border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center space-y-3">
+            <p class="font-bold text-slate-200">Explore Ethiopia Tourism Portal & Historical Archive</p>
+            <p>© 2026 Explore Ethiopia Tourism Bureau. Covering all 12 Regional States & 2 Chartered Cities.</p>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-xl font-extrabold text-coffeeDark mb-4">Inquire Vacation Package</h3>
+            <form onsubmit="handleBookingSubmit(event)" class="space-y-3 text-xs">
+                <input type="text" required placeholder="Full Name" class="w-full p-3 bg-slate-50 border rounded-xl">
+                <input type="email" required placeholder="Email Address" class="w-full p-3 bg-slate-50 border rounded-xl">
+                <select class="w-full p-3 bg-slate-50 border rounded-xl font-semibold">
+                    <option>Historic Circuit (Lalibela, Aksum, Gondar, Lake Tana)</option>
+                    <option>Ancient Tigray Rock Churches (Yeha & Abuna Yemata)</option>
+                    <option>Harar Walled City & Dire Dawa Heritage</option>
+                    <option>Simien & Bale Mountain Trekking</option>
+                    <option>Danakil Depression & Lava Lake Expedition</option>
+                    <option>Omo Valley Living Culture Tour</option>
+                    <option>Grand All-Region Expedition</option>
+                </select>
+                <button type="submit" class="w-full py-3 bg-ethGreen text-white font-bold rounded-xl shadow hover:bg-emerald-700 transition">
+                    Submit Package Inquiry
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="text-center max-w-3xl">
+            <img id="lightboxImage" src="" class="max-h-[80vh] mx-auto rounded-2xl shadow-2xl">
+            <p id="lightboxCaption" class="text-white text-xs mt-3 font-semibold"></p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-coffeeDark text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-500/30 transform translate-y-24 opacity-0 transition-all duration-300 text-xs font-semibold">
+        <span id="toastMessage">Notification message</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

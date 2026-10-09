@@ -1,0 +1,55 @@
+:root {
+    --color-eth-green: #008751;
+    --color-eth-yellow: #FCD116;
+    --color-eth-red: #E4002B;
+    --color-eth-gold: #D4AF37;
+    --color-coffee-dark: #2C1A1D;
+    --color-earth-warm: #FAF6F0;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-dark {
+    background: rgba(44, 26, 29, 0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.hero-pattern {
+    background-image: radial-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.map-region {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.map-region:hover, .map-region.active-region {
+    fill: #D4AF37 !important;
+    filter: drop-shadow(0px 4px 10px rgba(212, 175, 55, 0.8));
+    stroke: #ffffff !important;
+    stroke-width: 2px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 0.4; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pulse-pin {
+    animation: pulse-ring 2s infinite ease-in-out;
+}
